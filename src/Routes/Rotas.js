@@ -27,7 +27,7 @@ export default function Rotas(){
         <Tab.Navigator
           screenOptions={{
             tabBarStyle: {backgroundColor: '#000B1D'},
-            tabBarLabelStyle: {display: 'none'}
+            tabBarLabelStyle: {display: 'none'},
           }}
         >
         <Tab.Screen initialRouteName='Home'

@@ -47,6 +47,7 @@ export default function Login() {
                         textInput={senha} 
                         onChangeText={(digitado) => setSenha(digitado)}
                     />
+                    <Text style={styles.textEsqueceu}>Esqueceu sua senha?</Text>
                     <TouchableOpacity style={styles.btn} onPress={RealizaLogin}>
                         <Text style={styles.btnText}>ENTRAR</Text>
                     </TouchableOpacity>
@@ -89,13 +90,18 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
-        borderBottomColor: 'white',
-        borderBottomWidth: 1,
+        backgroundColor: 'rgba(57, 57, 57, 0.5)',
         height: 50,
         color: 'white',
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 10,
+        marginTop: 10
     },
     containerInput: {
-        width: '80%',
+        width: '90%',
+        display: 'flex',
+        flexDirection: 'column',
     },
     btn: {
         width: "70%",
@@ -149,5 +155,12 @@ const styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
         fontSize: 15
+    },
+    textEsqueceu: {
+        color: '#6D75E8',
+        textAlign: 'right',
+        fontWeight:  'bold',
+        marginTop: 5,
+        textDecorationLine: 'underline'
     }
 });

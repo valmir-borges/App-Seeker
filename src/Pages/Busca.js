@@ -1,6 +1,6 @@
 import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import React, { useEffect, useState } from 'react';
-import { Ionicons, FontAwesome} from '@expo/vector-icons';
+import { Ionicons, FontAwesome, FontAwesome5} from '@expo/vector-icons';
 
 export default function Busca(){
 
@@ -51,7 +51,10 @@ export default function Busca(){
                 <Ionicons name="search" size={24} color="white" style={styles.icon} />
             </View>
             <View style={styles.containerUsers}>
-                <Text style={styles.Users}>USUÁRIOS</Text>
+                <View style={styles.textContainer}>
+                    <FontAwesome5 name="users" size={24} color="white" style={styles.iconUser} />
+                    <Text style={styles.Users}>USUÁRIOS</Text>
+                </View>
                 {busca !== '' ? (
                     filtro ? (
                         <View style={styles.card}>
@@ -165,7 +168,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         width: '100%',
         marginBottom: 5,
     },
@@ -177,5 +180,20 @@ const styles = StyleSheet.create({
     },
     iconeActivy: {
         marginTop: 20
+    },
+    textContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'center',
+        alignContent: 'center',
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        justifyContent: 'center',
+        marginBottom: 10 // ajuste conforme necessário
+    },
+    iconUser: {
+        marginRight: 10, // ajuste conforme necessário
+        marginLeft: 10,
+        marginTop: 10
     }
 })

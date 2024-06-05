@@ -1,7 +1,8 @@
-import { ActivityIndicator, Button, FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import { ActivityIndicator, Animated, Button, FlatList, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import React, { useEffect, useRef, useState } from 'react';
 import Produto from "../Components/Produto";
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Home(){
 
@@ -24,6 +25,23 @@ export default function Home(){
         getProdutos();
     }, [])
 
+    //Criando um efeito de animação(transição)
+    const fade = useRef(new Animated.Value(0)).current;
+    //Tudo que estiver dentro do Animated.View irá receber a animação
+
+    //Foi usado o useFocusEffect, pois ele executa o código toda vez que entra na página
+    //Já o useEffect é executado uma só vez, quado carrega a página
+    useFocusEffect(
+        React.useCallback(()=>{
+            fade.setValue(0)//Será setado o valor inicial, para que toda vez que entrar na página seja 0, ou seja, reseta
+            Animated.timing(fade, {//Está pegando o fade e atribuindo valores
+                toValue: 1,//O valor vai para 1, ou seja, irá msotrar completamente, valor máximo
+                duration: 2000,//Duração da transição
+                useNativeDriver: true
+            }).start()
+        }, [])
+    )
+
     return(
         <View style={styles.container}>
             <View style={styles.containerLogo}>
@@ -39,6 +57,7 @@ export default function Home(){
                 <FontAwesome5 name="shopping-cart" size={24} color="#FF7A00" style={styles.icon} />
             </View>
                 {produtos.length > 0 ?//Se o array de produtos for maior que 0, significa que há produtos
+                    <Animated.View style={[{opacity: fade}]}>
                     <FlatList
                         data={produtos}
                         renderItem={({item}) => <Produto item={item}/>}
@@ -47,6 +66,7 @@ export default function Home(){
                         style={styles.flatList}
                         contentContainerStyle={styles.flatListProdutos}
                     />
+                    </Animated.View>
                     :
                     <ActivityIndicator size="large" color="white"/>
                 }
