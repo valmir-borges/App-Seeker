@@ -19,15 +19,15 @@ export default function Login() {
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.containerLogo}>
                 <Image
-                    source={require('../../assets/Logo.png')}
+                    source={require('../../assets/Logo-2.png')}
                     style={styles.logo}
                 />
-                <Text style={styles.logoText}>Adobe Express</Text>
+                <Text style={styles.textSlogan}>Reúna Esperança. Encontre Pessoas. Seeker.</Text>
             </View>
             <View style={styles.containerLogin}>
                 <View style={styles.containerInput}>
                     <View style={styles.containerIcon}>
-                        <FontAwesome6 name="user-large" size={40} color="white" />
+                        <FontAwesome6 name="user-large" size={40} color="#4654A3" />
                         <Text style={styles.loginText}>LOGIN</Text>
                     </View>
                     <TextInput
@@ -65,7 +65,7 @@ export default function Login() {
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        backgroundColor: '#000B1D',
+        backgroundColor: '#F3EFE4',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -74,11 +74,12 @@ const styles = StyleSheet.create({
     },
     containerLogo: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        marginBottom: 10,
+        gap: 10,
+        marginBottom: 20,
     },
     containerLogin: {
         display: 'flex',
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     },
     input: {
         width: '100%',
-        backgroundColor: 'rgba(57, 57, 57, 0.5)',
+        backgroundColor: 'rgba(57, 57, 57, 0.4)',
         height: 50,
         color: 'white',
         alignItems: 'center',
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         marginRight: 'auto',
         borderWidth: 1,
-        borderColor: 'white'
+        borderColor: 'black'
     },
     btnText: {
         lineHeight: 45,
@@ -123,10 +124,11 @@ const styles = StyleSheet.create({
         alignContent: "center",
         fontSize: 25,
         fontWeight: "bold",
+        color: 'black'
     },
     logo: {
         height: 100,
-        width: 100,
+        width: '100%',
         marginBottom: 10,
         resizeMode: 'contain',
     },
@@ -143,6 +145,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center', 
         marginBottom: 10,
+        color: '#4654A3'
     },
     containerIcon: {
         flexDirection: 'row',
@@ -162,5 +165,10 @@ const styles = StyleSheet.create({
         fontWeight:  'bold',
         marginTop: 5,
         textDecorationLine: 'underline'
+    },
+    textSlogan: {
+        fontWeight: 'bold',
+        color:'#270949',
+        fontSize: 16
     }
 });

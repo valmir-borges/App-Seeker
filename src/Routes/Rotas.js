@@ -26,7 +26,7 @@ export default function Rotas(){
     <NavigationContainer>
         <Tab.Navigator
           screenOptions={{
-            tabBarStyle: {backgroundColor: '#000B1D'},
+            tabBarStyle: {backgroundColor: '#F3EFE4'},
             tabBarLabelStyle: {display: 'none'},
           }}
         >
@@ -39,7 +39,7 @@ export default function Rotas(){
                   return (<Ionicons
                   name="home"
                   size={28}
-                  color={tabInfo.focused ? "#fff" : "#3E3E3E"}
+                  color={tabInfo.focused ? "#4654A3" : "#FFF"}
                   />)
               }
           }}
@@ -53,7 +53,7 @@ export default function Rotas(){
                     return (<FontAwesome6
                     name="magnifying-glass"
                     size={28}
-                    color={tabInfo.focused ? "#fff" : "#3E3E3E"}
+                    color={tabInfo.focused ? "#4654A3" : "#FFF"}
                 />)
                 }
             }}
@@ -67,7 +67,7 @@ export default function Rotas(){
                     return (<MaterialIcons 
                     name="add-box"
                     size={28}
-                    color={tabInfo.focused ? "#fff" : "#3E3E3E"}
+                    color={tabInfo.focused ? "#4654A3" : "#FFF"}
                 />)
                 }
             }}
@@ -81,7 +81,7 @@ export default function Rotas(){
                     return (<MaterialIcons 
                       name="smart-display"
                     size={28}
-                    color={tabInfo.focused ? "#fff" : "#3E3E3E"}
+                    color={tabInfo.focused ? "#4654A3" : "#FFF"}
                 />)
                 }
             }}
@@ -95,7 +95,7 @@ export default function Rotas(){
                     return (<FontAwesome
                     name="user-circle"
                     size={28}
-                    color={tabInfo.focused ? "#fff" : "#3E3E3E"}
+                    color={tabInfo.focused ? "#4654A3" : "#FFF"}
                 />)
                 }
             }}
