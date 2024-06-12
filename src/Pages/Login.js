@@ -1,20 +1,31 @@
 import { Button, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import React, { useContext, useState } from 'react';
 import { FontAwesome6 } from '@expo/vector-icons';
-import {AuthContext} from '../Context/AuthContext'
+import { AuthContext } from '../Context/AuthContext';
 
 export default function Login() {
+    const [email, setEmail] = useState();
+    const [senha, setSenha] = useState();
+    const [nome, setNome] = useState();
+    const [telefone, setTelefone] = useState();
+    const [erro, setErro] = useState(false);
+    const [showRegisterForm, setShowRegisterForm] = useState(false);
 
-    const [ email, setEmail ] = useState()
-    const [ senha, setSenha ] = useState()
-    const [ erro, setErro ] = useState(false)
+    const { Login, logado, error, Cadastrar } = useContext(AuthContext);
 
-    const {Login, logado, error} = useContext(AuthContext)//Pegando a função login e o logado que está no contexto
-
-    function RealizaLogin(){
-        Login(email,senha)
+    function RealizaLogin() {
+        Login(email, senha);
     }
-    
+
+    function RealizaCadastro() {
+        Cadastrar(nome, telefone, email, senha);
+      }
+      
+
+    function toggleForm() {
+        setShowRegisterForm(!showRegisterForm);
+    }
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.containerLogo}>
@@ -24,42 +35,88 @@ export default function Login() {
                 />
                 <Text style={styles.textSlogan}>Reúna Esperança. Encontre Pessoas. Seeker.</Text>
             </View>
-            <View style={styles.containerLogin}>
-                <View style={styles.containerInput}>
-                    <View style={styles.containerIcon}>
-                        <FontAwesome6 name="user-large" size={40} color="#4654A3" />
-                        <Text style={styles.loginText}>LOGIN</Text>
+            {showRegisterForm ? (
+                <View style={styles.containerLogin}>
+                    <View style={styles.containerInput}>
+                        <View style={styles.containerIcon}>
+                            <FontAwesome6 name="user-large" size={40} color="#4654A3" />
+                            <Text style={styles.loginText}>CADASTRO</Text>
+                        </View>                        
+                        <TextInput
+                            placeholder="Nome"
+                            placeholderTextColor="white"
+                            style={styles.input}
+                            value={nome}
+                            onChangeText={(digitado) => setNome(digitado)}
+                        />
+                        <TextInput
+                            placeholder="Telefone"
+                            placeholderTextColor="white"
+                            style={styles.input}
+                            value={telefone}
+                            onChangeText={(digitado) => setTelefone(digitado)}
+                        />
+                        <TextInput
+                            placeholder="Email"
+                            placeholderTextColor="white"
+                            style={styles.input}
+                            value={email}
+                            onChangeText={(digitado) => setEmail(digitado)}
+                        />
+                        <TextInput
+                            placeholder="Senha"
+                            placeholderTextColor="white"
+                            style={styles.input}
+                            secureTextEntry={true}
+                            value={senha}
+                            onChangeText={(digitado) => setSenha(digitado)}
+                        />
+                        <TouchableOpacity style={styles.btn} onPress={RealizaCadastro}>
+                            <Text style={styles.btnText}>CADASTRAR</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.textToggle} onPress={toggleForm}>
+                            Já tem uma conta? Faça login
+                        </Text>
                     </View>
-                    <TextInput
-                        placeholder="Insira seu email..."
-                        placeholderTextColor="white"
-                        style={styles.input}
-                        value={email}
-                        textInput={email} 
-                        onChangeText={(digitado) => setEmail(digitado)}
-                    />
-                    <TextInput
-                        placeholder="Insira sua senha..."
-                        placeholderTextColor="white"
-                        style={styles.input}
-                        secureTextEntry={true}
-                        value={senha}
-                        textInput={senha} 
-                        onChangeText={(digitado) => setSenha(digitado)}
-                    />
-                    <Text style={styles.textEsqueceu}>Esqueceu sua senha?</Text>
-                    <TouchableOpacity style={styles.btn} onPress={RealizaLogin}>
-                        <Text style={styles.btnText}>ENTRAR</Text>
-                    </TouchableOpacity>
                 </View>
-            </View>
-            {error && 
+            ) : (
+                <View style={styles.containerLogin}>
+                    <View style={styles.containerInput}>
+                        <View style={styles.containerIcon}>
+                            <FontAwesome6 name="user-large" size={40} color="#4654A3" />
+                            <Text style={styles.loginText}>LOGIN</Text>
+                        </View>
+                        <TextInput
+                            placeholder="Insira seu email..."
+                            placeholderTextColor="white"
+                            style={styles.input}
+                            value={email}
+                            onChangeText={(digitado) => setEmail(digitado)}
+                        />
+                        <TextInput
+                            placeholder="Insira sua senha..."
+                            placeholderTextColor="white"
+                            style={styles.input}
+                            secureTextEntry={true}
+                            value={senha}
+                            onChangeText={(digitado) => setSenha(digitado)}
+                        />
+                        <TouchableOpacity style={styles.btn} onPress={RealizaLogin}>
+                            <Text style={styles.btnText}>ENTRAR</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.textToggle} onPress={toggleForm}>
+                            Não tem uma conta? Cadastre-se
+                        </Text>
+                    </View>
+                </View>
+            )}
+            {error && (
                 <View>
                     <Text style={styles.textError}>Revise os campos. Tente novamente</Text>
                 </View>
-            }
+            )}
         </ScrollView>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -97,7 +154,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         padding: 10,
-        marginTop: 10
+        marginTop: 10,
     },
     containerInput: {
         width: '90%',
@@ -127,7 +184,7 @@ const styles = StyleSheet.create({
         color: 'black'
     },
     logo: {
-        height: 100,
+        height: 90,
         width: '100%',
         marginBottom: 10,
         resizeMode: 'contain',
@@ -137,7 +194,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginLeft: 10,
         fontWeight: 'bold',
-        marginBottom: 10
+        marginBottom: 10,
     },
     loginText: {
         fontSize: 25,
@@ -145,30 +202,34 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center', 
         marginBottom: 10,
-        color: '#4654A3'
+        color: '#4654A3',
     },
     containerIcon: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         gap: 20,
-        marginBottom: 10
+        marginBottom: 10,
     },
     textError: {
         color: 'red',
         fontWeight: 'bold',
-        fontSize: 15
-    },
-    textEsqueceu: {
-        color: '#6D75E8',
-        textAlign: 'right',
-        fontWeight:  'bold',
-        marginTop: 5,
-        textDecorationLine: 'underline'
+        fontSize: 15,
     },
     textSlogan: {
         fontWeight: 'bold',
-        color:'#270949',
-        fontSize: 16
-    }
+        color: '#270949',
+        fontSize: 16,
+    },
+    textToggle: {
+        color: '#6D75E8',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        marginTop: 20,
+        textDecorationLine: 'underline',
+        fontSize: 18, // Aumenta o tamanho da fonte
+        backgroundColor: '#F3EFE4', // Adiciona um fundo para destacar
+        padding: 10, // Adiciona espaçamento interno
+        borderRadius: 5, // Adiciona bordas arredondadas
+    },
 });

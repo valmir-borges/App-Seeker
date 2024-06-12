@@ -53,7 +53,7 @@ export default function Home() {
                 />
             </View>
             <View style={styles.textContainer}>
-                <Text style={styles.textProdutos}>PESSOAS DESAPARECIDAS</Text>
+                <Text style={styles.textPessoas}>PESSOAS DESAPARECIDAS</Text>
             </View>
             <View style={styles.listContainer}>
                 {pessoas.length > 0 ? (
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         width: 100,
         resizeMode: 'contain',
     },
-    textProdutos: {
+    textPessoas: {
         textAlign: 'center',
         color: '#4654A3',
         fontWeight: 'bold',
