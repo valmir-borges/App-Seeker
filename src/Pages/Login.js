@@ -165,12 +165,11 @@ const styles = StyleSheet.create({
         width: "70%",
         height: 50,
         borderRadius: 10,
-        backgroundColor: "transparent",
+        backgroundColor: "#4654A3",
         marginTop: 30,
         marginLeft: 'auto',
         marginRight: 'auto',
         borderWidth: 1,
-        borderColor: 'black'
     },
     btnText: {
         lineHeight: 45,
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
         alignContent: "center",
         fontSize: 25,
         fontWeight: "bold",
-        color: 'black'
     },
     logo: {
         height: 90,
@@ -222,7 +220,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     textToggle: {
-        color: '#6D75E8',
+        color: 'blue',
         textAlign: 'center',
         fontWeight: 'bold',
         marginTop: 20,

@@ -5,7 +5,7 @@ export const AuthContext = createContext(0);
 
 function AuthProvider({children}){
 
-    const [ logado, setLogado] = useState(false)//Criando a const logado no contexto, pois ele será disponível para todo mundo
+    const [ logado, setLogado] = useState(true)//Criando a const logado no contexto, pois ele será disponível para todo mundo
     const [ error, setError] = useState(false)
 
     async function Login(email, senha) {
