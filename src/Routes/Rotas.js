@@ -1,76 +1,75 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome6, FontAwesome, Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
+import { FontAwesome6, FontAwesome, Ionicons } from '@expo/vector-icons';
 import { AuthContext } from '../Context/AuthContext';
+
+import Home from '../Pages/Home';
+import Busca from '../Pages/Busca';
+import Profile from '../Pages/Profile';
+import Login from '../Pages/Login';
+
 
 const Tab = createBottomTabNavigator();
 
-import Home from '../Pages/Home'
-import Busca from '../Pages/Busca'
-import Login from '../Pages/Login'
-import Profile from '../Pages/Profile';
+export default function Rotas() {
+  const { logado, theme } = useContext(AuthContext); // Obtendo logado e theme do contexto
 
-export default function Rotas(){
-
-  const {logado} = useContext(AuthContext)//Pegando a const logado do contexto
-
-  if(logado == false){
-    return(
-      <Login/>
-    )
+  if (!logado) {
+    return <Login />;
   }
-  return(
+
+  return (
     <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            tabBarStyle: {backgroundColor: '#F3EFE4'},
-            tabBarLabelStyle: {display: 'none'},
-          }}
-        >
-        <Tab.Screen initialRouteName='Home'
-          name="Home" 
-          component={Home} 
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: { backgroundColor: theme.background }, // Cor de fundo da barra de navegação
+          tabBarLabelStyle: { display: 'none' }, // Ocultando rótulos das abas
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
           options={{
-              headerShown: false,
-              tabBarIcon: (tabInfo) => {
-                  return (<Ionicons
-                  name="home"
-                  size={28}
-                  color={tabInfo.focused ? "#4654A3" : "black"}
-                  />)
-              }
+            headerShown: false,
+            tabBarIcon: ({ focused, color, size }) => (
+              <Ionicons
+                name={focused ? 'home' : 'home-outline'} // Ícone completo ou contorno para não selecionado
+                size={size}
+                color={focused ? theme.primary : theme.text} // Cor do ícone baseado no foco e no tema
+              />
+            ),
           }}
-          />
-          <Tab.Screen 
-            name="Busca" 
-            component={Busca}
-            options={{
-                headerShown: false,
-                tabBarIcon: (tabInfo) => {
-                    return (<FontAwesome6
-                    name="magnifying-glass"
-                    size={28}
-                    color={tabInfo.focused ? "#4654A3" : "black"}
-                />)
-                }
-            }}
-            />
-          <Tab.Screen 
-            name="Profile" 
-            component={Profile}
-            options={{
-                headerShown: false,
-                tabBarIcon: (tabInfo) => {
-                    return (<FontAwesome
-                    name="user-circle"
-                    size={28}
-                    color={tabInfo.focused ? "#4654A3" : "black"}
-                />)
-                }
-            }}
-            />
-        </Tab.Navigator>
+        />
+        <Tab.Screen
+          name="Busca"
+          component={Busca}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused, color, size }) => (
+              <FontAwesome
+                name={focused ? 'search' : 'search'} // Ícone completo ou alternativo para não selecionado
+                size={size}
+                color={focused ? theme.primary : theme.text} // Cor do ícone baseado no foco e no tema
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ focused, color, size }) => (
+              <FontAwesome
+                name={focused ? 'user-circle' : 'user-circle-o'} // Ícone completo ou contorno para não selecionado
+                size={size}
+                color={focused ? theme.primary : theme.text} // Cor do ícone baseado no foco e no tema
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }

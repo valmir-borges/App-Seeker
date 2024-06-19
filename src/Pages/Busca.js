@@ -1,87 +1,78 @@
-import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
-import React, { useEffect, useState } from 'react';
-import { Ionicons, FontAwesome, FontAwesome5} from '@expo/vector-icons';
+import React, { useEffect, useState, useContext } from 'react';
+import { ActivityIndicator, Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Ionicons, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
+import { AuthContext } from '../Context/AuthContext'; // Importe o contexto de tema aqui
 
-export default function Busca(){
+export default function Busca() {
+    const { theme } = useContext(AuthContext); // Obtendo o tema do contexto
 
-    const [usuarios, setUsuarios] = useState([]);
-    const [busca,setBusca] = useState('')
-    const [ error, setError] = useState(false)
-    const [ filtro, setFiltro] = useState('')
+    const [pessoas, setPessoas] = useState([]);
+    const [busca, setBusca] = useState('');
+    const [error, setError] = useState(false);
+    const [filtro, setFiltro] = useState('');
 
-    async function getUsuarios(){
-        await fetch('https://fakestoreapi.com/users' , {//Pegando todos os usuários e depois vai ser filtrado
-            method: 'GET',//método get que pega as informações, não precisa passar ele, mas é uma boa prática
+    async function getPessoas() {
+        await fetch('http://10.139.75.46:5000/api/Pessoa/GetAllPessoas', {
+            method: 'GET',
             headers: {
                 'content-type': 'application/json'
             }
         })
-        .then(res=>(res.ok == true) ? res.json() : false)
-        .then(json=> setUsuarios(json))
-        .catch(err => setError(true))
+            .then(res => (res.ok === true) ? res.json() : false)
+            .then(json => setPessoas(json))
+            .catch(err => setError(true));
     }
 
-    useEffect(()=> {//No momento que carregar a página será buscado todos os usuários
-        getUsuarios();
-    }, [])
+    useEffect(() => {
+        getPessoas();
+    }, []);
 
-    useEffect(()=>{//Toda vez que a variável busca for alterada, ou seja, toda vez que o usuário digitar algo, iremos filtrar os usuários
-        //Iremos filtrar os usuários a partir do que é digitado
-        setFiltro(usuarios.filter((usuario) => usuario.name.firstname == busca)[0])
-        //Está sendo pego somente quando o que for digitado for 100% igual ao primeiro nome
-        console.log(filtro)
-    }, [busca])
+    useEffect(() => {
+        setFiltro(pessoas.filter((pessoa) => pessoa.pessoaNome.toLowerCase().includes(busca.toLowerCase()))[0]);
+    }, [busca, pessoas]);
 
-    return(
-        <ScrollView contentContainerStyle={styles.container}>
+    return (
+        <ScrollView contentContainerStyle={[styles.container, { backgroundColor: theme.background }]}>
             <View style={styles.containerLogo}>
                 <Image
                     source={require('../../assets/Logo.png')}
                     style={styles.logo}
                 />
             </View>
-            <View style={[styles.inputContainer, {color: 'white'}]}>
+            <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="Buscar..."
-                    style={styles.inputBusca}
+                    style={[styles.inputBusca, { color: theme.text }]}
                     value={busca}
                     onChangeText={(digitado) => setBusca(digitado)}
-                    placeholderTextColor="white"
+                    placeholderTextColor={theme.placeholder}
                 />
-                <Ionicons name="search" size={24} color="white" style={styles.icon} />
+                <Ionicons name="search" size={24} color={theme.text} style={styles.icon} />
             </View>
             <View style={styles.containerUsers}>
                 <View style={styles.textContainer}>
-                    <FontAwesome5 name="users" size={24} color="white" style={styles.iconUser} />
-                    <Text style={styles.Users}>USUÁRIOS</Text>
+                    <FontAwesome5 name="users" size={24} color={theme.text} style={styles.iconUser} />
+                    <Text style={[styles.Users, { color: theme.text }]}>USUÁRIOS</Text>
                 </View>
                 {busca !== '' ? (
                     filtro ? (
-                        <View style={styles.card}>
+                        <View style={[styles.card, { backgroundColor: theme.cardBackground }]}>
                             <View style={styles.cardTop}>
                                 <FontAwesome
                                     name="user-circle"
                                     size={60}
-                                    color='black'
+                                    color={theme.text}
                                 />
                             </View>
                             <View style={styles.cardBottom}>
                                 <View style={styles.textContainer}>
                                     <Text style={styles.textEsquerda}>NOME:</Text>
-                                    <Text style={styles.cardText}>{filtro.name.firstname}</Text>
-                                </View>
-                                <View style={styles.textContainer}>
-                                    <Text style={styles.textEsquerda}>EMAIL:</Text>
-                                    <Text style={styles.cardText}>{filtro.email}</Text>
-                                </View>
-                                <View style={styles.textContainer}>
-                                    <Text style={styles.textEsquerda}>TELEFONE:</Text>
-                                    <Text style={styles.cardText}>{filtro.phone}</Text>
+                                    <Text style={[styles.cardText, { color: theme.text }]}>{filtro.pessoaNome}</Text>
                                 </View>
                             </View>
                         </View>
                     ) : (
-                        <ActivityIndicator size="large" color="white" style={styles.iconeActivy}/>
+                        <ActivityIndicator size="large" color={theme.text} style={styles.iconeActivy} />
                     )
                 ) : null}
             </View>
@@ -92,7 +83,6 @@ export default function Busca(){
 const styles = StyleSheet.create({
     container: {
         flexGrow: 1,
-        backgroundColor: '#000B1D',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -121,17 +111,16 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     inputBusca: {
-        flex: 1, // Adicione esta linha
-        height: '100%', // Altere de '6%' para '100%'
+        flex: 1,
+        height: '100%',
         padding: 10,
-        color: 'white'
     },
     inputContainer: {
         width: '90%',
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 10,
-        backgroundColor: 'rgba(57, 57, 57, 0.5)',
+        backgroundColor: 'rgba(57, 57, 57, 0.4)',
         padding: 10,
     },
     icon: {
@@ -139,8 +128,7 @@ const styles = StyleSheet.create({
     },
     Users: {
         fontSize: 30,
-        color: 'white',
-        fontWeight:'bold',
+        fontWeight: 'bold',
         textAlign: 'center',
         marginTop: 10
     },
@@ -162,7 +150,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cardText: {
-        color: 'white',
         fontSize: 16,
         fontWeight: 'bold',
     },
@@ -189,11 +176,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         textAlignVertical: 'center',
         justifyContent: 'center',
-        marginBottom: 10 // ajuste conforme necessário
+        marginBottom: 10
     },
     iconUser: {
-        marginRight: 10, // ajuste conforme necessário
+        marginRight: 10,
         marginLeft: 10,
         marginTop: 10
     }
-})
+});
