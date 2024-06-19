@@ -100,7 +100,12 @@ function AuthProvider({ children }) {
           await AsyncStorage.setItem("userName", usuarioNome);
 
           setLogado(true);
-        } else {
+        } 
+        if(res.status === 500)
+          {
+            setError('Email já existe!')
+          }
+        else {
           setError(true);
         }
       })

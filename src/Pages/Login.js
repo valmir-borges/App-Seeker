@@ -111,7 +111,7 @@ export default function Login() {
             )}
             {error && (
                 <View>
-                    <Text style={[styles.textError, { color: 'red' }]}>Revise os campos. Tente novamente</Text>
+                    <Text style={[styles.textError, { color: 'red' }]}>{error}</Text>
                 </View>
             )}
         </ScrollView>
