@@ -12,16 +12,19 @@ const lightTheme = {
     placeholder: 'black',
     text: '#4654A3',
     border: 'black',
-    textName: 'black'
+    textName: 'black',
+    textNamePessoa: '#FFFF',
+    backgroundButton: '#4654A3'
+
   };
   
   const darkTheme = {
     primary: '#FFFF',
     secondary: '#FFFF',
     background: '#000B1D',
-    placeholder: 'white',
+    placeholder: '#FFFF',
     text: '#FFFF',
-    border: 'white',
+    border: '#FFFF',
     textName: '#848AF9',
     backgroundButton: '#4654A3'
   };

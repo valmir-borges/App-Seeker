@@ -44,28 +44,28 @@ export default function Login() {
                         <TextInput
                             placeholder="Nome"
                             placeholderTextColor={theme.placeholder}
-                            style={[styles.input, { color: theme.text}]}
+                            style={[styles.input, { color: theme.placeholder}]}
                             value={nome}
                             onChangeText={(digitado) => setNome(digitado)}
                         />
                         <TextInput
                             placeholder="Telefone"
                             placeholderTextColor={theme.placeholder}
-                            style={[styles.input, { color: theme.text}]}
+                            style={[styles.input, { color: theme.placeholder}]}
                             value={telefone}
                             onChangeText={(digitado) => setTelefone(digitado)}
                         />
                         <TextInput
                             placeholder="Email"
                             placeholderTextColor={theme.placeholder}
-                            style={[styles.input, { color: theme.text}]}
+                            style={[styles.input, { color: theme.placeholder}]}
                             value={email}
                             onChangeText={(digitado) => setEmail(digitado)}
                         />
                         <TextInput
                             placeholder="Senha"
                             placeholderTextColor={theme.placeholder}
-                            style={[styles.input, { color: theme.text}]}
+                            style={[styles.input, { color: theme.placeholder}]}
                             secureTextEntry={true}
                             value={senha}
                             onChangeText={(digitado) => setSenha(digitado)}
@@ -88,14 +88,14 @@ export default function Login() {
                         <TextInput
                             placeholder="Insira seu email..."
                             placeholderTextColor={theme.placeholder}
-                            style={[styles.input, { color: theme.text}]}
+                            style={[styles.input, { color: theme.placeholder}]}
                             value={email}
                             onChangeText={(digitado) => setEmail(digitado)}
                         />
                         <TextInput
                             placeholder="Insira sua senha..."
                             placeholderTextColor={theme.placeholder}
-                            style={[styles.input, { color: theme.text}]}
+                            style={[styles.input, { color: theme.placeholder}]}
                             secureTextEntry={true}
                             value={senha}
                             onChangeText={(digitado) => setSenha(digitado)}

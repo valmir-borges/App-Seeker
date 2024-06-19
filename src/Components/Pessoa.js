@@ -74,7 +74,7 @@ export default function Pessoa({ item, index }) {
 
   return (
     <View>
-      <View style={[styles.boxPessoa, { borderColor: theme.border , borderWidth: 1 }]}>
+      <View style={[styles.boxPessoa, { backgroundColor:'rgba(255, 255, 255, 0.1)', }]}>
         <Image source={{ uri: item.pessoaFoto }} style={styles.imagemPessoa} />
         <View style={{ paddingHorizontal: 20, flex: 1 }}>
           <Text style={[styles.textoValue, { color: theme.text }]}>
@@ -98,7 +98,6 @@ export default function Pessoa({ item, index }) {
         <View style={styles.centeredView}>
           <View style={[styles.modalView, { backgroundColor: theme.background }]}>
             <ScrollView contentContainerStyle={styles.modalContent}>
-              <Image source={{ uri: item.pessoaFoto }} style={styles.imagemPessoaModal} />
               <Text style={[styles.modalText, { color: theme.text }]}>
                 <Text style={styles.modalTitle}>Nome:</Text> {item.pessoaNome}
               </Text>
@@ -232,7 +231,6 @@ export default function Pessoa({ item, index }) {
 const styles = StyleSheet.create({
   boxPessoa: {
     borderRadius: 20,
-    borderWidth: 1, // Adicionando borda
     padding: 20,
     marginBottom: 20,
     shadowColor: "#000",
@@ -242,7 +240,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 0.0001
   },
   imagemPessoa: {
     width: '100%',

@@ -28,7 +28,7 @@ export default function Busca() {
     }, []);
 
     useEffect(() => {
-        setFiltro(pessoas.filter((pessoa) => pessoa.pessoaNome.toLowerCase().includes(busca.toLowerCase()))[0]);
+        setFiltro(pessoas.find((pessoa) => pessoa.pessoaNome.toLowerCase() === busca.toLowerCase()));
     }, [busca, pessoas]);
 
     return (
@@ -42,21 +42,21 @@ export default function Busca() {
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="Buscar..."
-                    style={[styles.inputBusca, { color: theme.text }]}
+                    style={[styles.inputBusca, { color: theme.placeholder }]}
                     value={busca}
                     onChangeText={(digitado) => setBusca(digitado)}
                     placeholderTextColor={theme.placeholder}
                 />
-                <Ionicons name="search" size={24} color={theme.text} style={styles.icon} />
+                <Ionicons name="search" size={24} color={theme.placeholder} style={styles.icon} />
             </View>
             <View style={styles.containerUsers}>
                 <View style={styles.textContainer}>
                     <FontAwesome5 name="users" size={24} color={theme.text} style={styles.iconUser} />
-                    <Text style={[styles.Users, { color: theme.text }]}>USUÁRIOS</Text>
+                    <Text style={[styles.Users, { color: theme.text }]}>PESSOAS</Text>
                 </View>
                 {busca !== '' ? (
                     filtro ? (
-                        <View style={[styles.card, { backgroundColor: theme.cardBackground }]}>
+                        <View style={[styles.card, { backgroundColor: theme.cardBackground, borderWidth: 1, borderColor: theme.border}]}>
                             <View style={styles.cardTop}>
                                 <FontAwesome
                                     name="user-circle"
@@ -66,8 +66,14 @@ export default function Busca() {
                             </View>
                             <View style={styles.cardBottom}>
                                 <View style={styles.textContainer}>
-                                    <Text style={styles.textEsquerda}>NOME:</Text>
+                                    <Text style={[styles.textEsquerda, {color: theme.textName}]}>NOME:</Text>
                                     <Text style={[styles.cardText, { color: theme.text }]}>{filtro.pessoaNome}</Text>
+                                </View>
+                                <View style={styles.textContainer}>
+                                    <Text style={[styles.textEsquerda, {color: theme.textName}]}>STATUS:</Text>
+                                    <Text style={[styles.cardText, { color: theme.text }]}>
+                                        {filtro.pessoaStatus === 1 ? "DESAPARECIDO" : "ENCONTRADO"}
+                                    </Text>                                
                                 </View>
                             </View>
                         </View>
@@ -137,10 +143,10 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderRadius: 10,
+        borderRadius: 20,
         padding: 15,
         marginTop: 10,
-        width: '70%'
+        width: '100%'
     },
     cardTop: {
         alignItems: 'center',
@@ -148,22 +154,27 @@ const styles = StyleSheet.create({
     },
     cardBottom: {
         alignItems: 'center',
+        justifyContent: 'center'
     },
     cardText: {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 'bold',
+        width: '40%',
     },
     textContainer: {
+        display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        justifyContent: 'space-around',
         width: '100%',
         marginBottom: 5,
     },
     textEsquerda: {
-        color: '#FFDB58',
         textAlign: 'left',
-        width: '45%',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 15,
+        width: '40%'
+
     },
     iconeActivy: {
         marginTop: 20

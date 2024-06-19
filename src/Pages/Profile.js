@@ -88,49 +88,49 @@ export default function Profile() {
             <View style={styles.inputContainer}>
                 <TextInput
                     placeholder="Insira o nome da pessoa..."
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={nome}
                     onChangeText={(digitado) => setNome(digitado)}
                 />
                 <TextInput
                     placeholder="Insira a roupa da pessoa..."
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={roupa}
                     onChangeText={(digitado) => setRoupa(digitado)}
                 />
                 <TextInput
                     placeholder="Insira a cor da pessoa..."
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={cor}
                     onChangeText={(digitado) => setCor(digitado)}
                 />
                 <TextInput
                     placeholder="Insira o sexo da pessoa..."
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={sexo}
                     onChangeText={(digitado) => setSexo(digitado)}
                 />
                 <TextInput
                     placeholder="Insira a observação..."
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={observacao}
                     onChangeText={(digitado) => setObservacao(digitado)}
                 />
                 <TextInput
                     placeholder="Insira o local de desaparecimento"
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={localDesaparecimento}
                     onChangeText={(digitado) => setLocalDesaparecimento(digitado)}
                 />
                 <TextInput
                     placeholder="Insira a foto da pessoa..."
-                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                    style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                     placeholderTextColor={theme.placeholder}
                     value={foto}
                     onChangeText={(digitado) => setFoto(digitado)}
@@ -138,7 +138,7 @@ export default function Profile() {
                 <TouchableOpacity onPress={() => setMostrarSelecionarData(true)}>
                     <TextInput
                         placeholder="Selecione a data de desaparecimento"
-                        style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.text }]}
+                        style={[styles.input, { backgroundColor: 'rgba(57, 57, 57, 0.4)', color: theme.placeholder }]}
                         placeholderTextColor={theme.placeholder}
                         value={formatarData(dataDesaparecimento)}
                         editable={false}
